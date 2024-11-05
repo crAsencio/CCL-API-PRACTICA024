@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información de IVA - CCL Auditores y Consultores</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        .error {
+            color: #e74c3c;
+            text-align: center;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Información de IVA</h1>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } else { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Base</th>
+                        <th>Tasa (%)</th>
+                        <th>IVA Calculado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= info.base %></td>
+                        <td><%= info.tasa %></td>
+                        <td><%= info.ivaSimulado %></td>
+                    </tr>
+                </tbody>
+            </table>
+        <% } %>
+        <footer>
+            &copy; 2024 CCL Auditores y Consultores. Todos los derechos reservados.
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,15 +1,25 @@
-// leyes-sociales.js
 class LeyesSociales {
-    constructor(tasaContribucion = 0.1) {
-        this.tasaContribucion = tasaContribucion;
+    constructor() {}
+
+    async obtenerInformacion(url) {
+        try {
+            const respuesta = await fetch(url);
+            if (!respuesta.ok) {
+                throw new Error('Error en la red');
+            }
+            const datos = await respuesta.json();
+            if (!datos || datos.length === 0) {
+                throw new Error('No hay leyes sociales disponibles.');
+            }
+            this.mostrarDatos(datos);
+        } catch (error) {
+            console.error('Error al obtener datos:', error);
+            throw new Error('Error al obtener leyes sociales: ' + error.message);
+        }
     }
 
-    calcularContribucion(sueldo) {
-        return sueldo * this.tasaContribucion;
-    }
-
-    obtenerInformacion(sueldo) {
-        return `Contribución de Leyes Sociales: ${this.calcularContribucion(sueldo)} sobre un sueldo de ${sueldo}`;
+    mostrarDatos(datos) {
+        console.table(datos);
     }
 }
 

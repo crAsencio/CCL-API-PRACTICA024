@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenido Protegido - CCL Auditores y Consultores</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-top: 5px;
+            color: #ecf0f1;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 120px);
+            padding: 20px;
+        }
+        .protected-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.2s;
+            width: 100%;
+            max-width: 600px;
+        }
+        .protected-content:hover {
+            transform: scale(1.03);
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+        p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background 0.3s, transform 0.2s;
+            width: 220px; 
+        }
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #bdc3c7;
+            color: #ffffff;
+            position: relative;
+        }
+        footer .btn {
+            background-color: #e74c3c;
+            width: auto;
+        }
+        footer .btn:hover {
+            background-color: #c0392b;
+        }
+        @media (max-width: 600px) {
+            .protected-content {
+                padding: 20px;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bienvenido, <%= user.username %>!</h1>
+        <div class="company-name">CCL Auditores y Consultores</div>
+    </header>
+    <main>
+        <section class="protected-content">
+            <h2>Contenido Protegido</h2>
+            <p>Accede a la información que necesitas de manera segura.</p>
+            <div>
+                <a class="btn" href="/iva.js">IVA</a>
+                <a class="btn" href="/leyes-sociales.js">Leyes Sociales</a>
+                <a class="btn" href="/estado-de-renta.js">Estado de Renta</a>
+                <a class="btn" href="/sueldos.js">Sueldos</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <button id="close-session" class="btn">Cerrar sesión</button>
+    </footer>
+
+    <script>
+        const logoutButton = document.getElementById('close-session');
+        logoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((res) => {
+                if (res.ok) {
+                    window.location.href = '/';
+                } else {
+                    alert('Error al cerrar sesión. Inténtalo de nuevo.');
+                }
+            }).catch(err => {
+                console.error('Error en la conexión:', err);
+            });
+        });
+    </script>
+</body>
+</html>

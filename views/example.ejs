@@ -1,213 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="es">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login & Registration Forms</title>
+    <title>CCL Auditores y Consultores - Inicio de Sesión</title>
     <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
+        * {
+            box-sizing: border-box;
+        }
 
-      body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-          Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-          sans-serif;
-        background-color: #f5f5f5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-      }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
 
-      .form-container {
-        background-color: #fff;
-        padding: 20px;
-        margin: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
-      }
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+        }
 
-      form h2 {
-        margin-bottom: 20px;
-        font-size: 24px;
-        text-align: center;
-      }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+            text-align: left;
+            font-weight: 500;
+        }
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
 
-      input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
 
-      button {
-        width: 100%;
-        padding: 10px;
-        background-color: #28a745;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-      }
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
 
-      button:hover {
-        background-color: #218838;
-      }
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2980b9;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #1f6392;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #e74c3c;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .toggle-button {
+            background: none;
+            border: none;
+            color: #2980b9;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            text-decoration: underline;
+        }
+
+        .app-description {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <% if (typeof username !== 'undefined') { %>
-      <div class="form-container">
-        <h2>Hola <%= username %>!</h2>
-        <p>Estás en el panel de administración</p>
-        <button id="close-session">Cerrar sesión</button>
-      </div>
-      <% } %> <% if (typeof username === 'undefined') { %>
-      <div class="form-container">
-        <form id="login-form">
-          <h2>Login</h2>
-          <label for="login-username">Username</label>
-          <input type="text" id="login-username" name="username" required />
+        <% if (typeof username !== 'undefined') { %>
+            <h2>Hola, <%= username %>!</h2>
+            <p class="app-description">Estás en el panel de administración de CCL Auditores y Consultores.</p>
+            <button id="close-session">Cerrar sesión</button>
+        <% } else { %>
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <label for="login-username">Nombre de usuario</label>
+                <input type="text" id="login-username" name="username" required />
 
-          <label for="login-password">Password</label>
-          <input type="text" id="login-password" name="password" required />
+                <label for="login-password">Contraseña</label>
+                <div class="input-container">
+                    <input type="password" id="login-password" name="password" required />
+                    <span id="toggle-password" class="eye-icon">👁</span>
+                </div>
 
-          <button type="submit">Login</button>
-          <span>&nbsp;</span>
-        </form>
-      </div>
+                <button type="submit">Iniciar Sesión</button>
+                <div class="message" id="login-message"></div>
+            </form>
+            
+            <h2 class="hidden">Registrar</h2>
+            <form id="register-form" class="hidden">
+                <label for="register-username">Nombre de usuario</label>
+                <input type="text" id="register-username" name="username" required />
 
-      <div class="form-container">
-        <form id="register-form">
-          <h2>Register</h2>
-          <label for="register-username">Username</label>
-          <input type="text" id="register-username" name="username" required />
+                <label for="register-password">Contraseña</label>
+                <div class="input-container">
+                    <input type="password" id="register-password" name="password" required />
+                    <span id="toggle-register-password" class="eye-icon">👁</span>
+                </div>
 
-          <label for="register-password">Password</label>
-          <input
-            type="password"
-            id="register-password"
-            name="password"
-            required
-          />
+                <label for="register-confirm-password">Confirmar contraseña</label>
+                <div class="input-container">
+                    <input type="password" id="register-confirm-password" name="confirm-password" required />
+                    <span id="toggle-confirm-password" class="eye-icon">👁</span>
+                </div>
 
-          <label for="register-confirm-password">Confirm password</label>
-          <input
-            type="password"
-            id="register-confirm-password"
-            name="confirm-password"
-            required
-          />
-
-          <button type="submit">Register</button>
-          <span>&nbsp;</span>
-        </form>
-      </div>
-      <% } %>
+                <button type="submit">Registrar</button>
+                <div class="message" id="register-message"></div>
+            </form>
+            
+            <button id="toggle-register" class="toggle-button">¿No tienes cuenta? Regístrate aquí</button>
+            <div class="footer">© 2024 CCL Auditores y Consultores</div>
+        <% } %>
     </div>
 
     <script>
-      const $ = (el) => document.querySelector(el);
+        const $ = (el) => document.querySelector(el);
 
-      const loginForm = $('#login-form');
-      const loginSpan = $('#login-form span');
+        const loginForm = $('#login-form');
+        const loginMessage = $('#login-message');
+        const registerForm = $('#register-form');
+        const registerMessage = $('#register-message');
+        const toggleRegisterButton = $('#toggle-register');
 
-      const registerForm = $('#register-form');
-      const registerSpan = $('#register-form span');
+        // Toggle password visibility
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = $(inputId);
+            const icon = $(iconId);
+            let isPasswordVisible = false;
 
-      const logoutButton = $('#close-session');
-
-      loginForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const username = $('#login-username').value;
-        const password = $('#login-password').value;
-
-        fetch('login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-        }).then((res) => {
-          if (res.ok) {
-            loginSpan.innerText = 'Sesión iniciada... Entrando...';
-            loginSpan.style.color = '#28a745';
-            setTimeout(() => {
-              window.location.href = '/protected';
-            }, 2000);
-          } else {
-            loginSpan.innerText = 'Error al iniciar sesión';
-            loginSpan.style.color = '#dc3545';
-          }
-        });
-      });
-
-      registerForm?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const username = $('#register-username').value;
-        const password = $('#register-password').value;
-        const confirmPassword = $('#register-confirm-password').value;
-
-        if (password !== confirmPassword) {
-          alert('Las contraseñas no coinciden');
-          return;
+            icon.addEventListener('click', () => {
+                isPasswordVisible = !isPasswordVisible;
+                input.type = isPasswordVisible ? 'text' : 'password';
+                icon.textContent = isPasswordVisible ? '🙈' : '👁'; // Usando un icono más minimalista
+            });
         }
 
-        fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
-        }).then((res) => {
-          console.log(res);
-          if (res.ok) {
-            registerSpan.innerText = 'Usuario registrado... Entrado...';
-            registerSpan.style.color = '#28a745';
-            setTimeout(() => {
-              window.location.href = '/protected';
-            }, 2000);
-          } else {
-            registerSpan.innerText = 'Error al registrar usuario';
-            registerSpan.style.color = '#dc3545';
-          }
-        });
-      });
+        togglePasswordVisibility('#login-password', '#toggle-password');
+        togglePasswordVisibility('#register-password', '#toggle-register-password');
+        togglePasswordVisibility('#register-confirm-password', '#toggle-confirm-password');
 
-      logoutButton?.addEventListener('click', (e) => {
-        e.preventDefault();
-        fetch('/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }).then((res) => {
-          console.log(res);
-          window.location.href = '/';
+        loginForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = $('#login-username').value;
+            const password = $('#login-password').value;
+
+            fetch('login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            }).then((res) => {
+                if (res.ok) {
+                    loginMessage.innerText = 'Sesión iniciada...';
+                    loginMessage.style.color = '#28a745';
+                    setTimeout(() => {
+                        window.location.href = '/protected';
+                    }, 2000);
+                } else {
+                    loginMessage.innerText = 'Error al iniciar sesión';
+                }
+            });
         });
-      });
+
+        registerForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = $('#register-username').value;
+            const password = $('#register-password').value;
+            const confirmPassword = $('#register-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                registerMessage.innerText = 'Las contraseñas no coinciden';
+                return;
+            }
+
+            fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            }).then((res) => {
+                if (res.ok) {
+                    registerMessage.innerText = 'Usuario registrado...';
+                    registerMessage.style.color = '#28a745';
+                    setTimeout(() => {
+                        window.location.href = '/protected';
+                    }, 2000);
+                } else {
+                    registerMessage.innerText = 'Error al registrar usuario';
+                }
+            });
+        });
+
+        toggleRegisterButton.addEventListener('click', () => {
+            const isRegistering = registerForm.classList.toggle('hidden');
+            loginForm.classList.toggle('hidden');
+            $('#toggle-register').innerText = isRegistering ? '¿Ya tienes cuenta? Inicia sesión aquí' : '¿No tienes cuenta? Regístrate aquí';
+        });
+
+        document.getElementById('close-session')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            fetch('/logout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            }).then((res) => {
+                window.location.href = '/';
+            });
+        });
     </script>
-  </body>
+</body>
 </html>
-

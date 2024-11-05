@@ -1,6 +1,6 @@
-// user-repository.js
+
 import crypto from 'node:crypto';
-import DBLocal from 'db-local'; // Importar DBLocal por defecto
+import DBLocal from 'db-local';
 import bcrypt from 'bcrypt';
 import { SALT_ROUNDS } from './config.js';
 
@@ -22,7 +22,7 @@ class UserRepository {
         UserRepository.validateUsername(username);
         UserRepository.validatePassword(password);
 
-        const existingUser = users.find({ username });
+        const existingUser = users.findOne({ username });
         if (existingUser) {
             throw new Error('El usuario ya existe');
         }
@@ -37,7 +37,7 @@ class UserRepository {
     static async login({ username, password }) {
         UserRepository.validateUsername(username);
         UserRepository.validatePassword(password);
-        
+
         const user = users.findOne({ username });
         if (!user) {
             throw new Error('El nombre de usuario no existe');
@@ -70,5 +70,4 @@ class UserRepository {
     }
 }
 
-// Exporta la clase UserRepository
 export { UserRepository };

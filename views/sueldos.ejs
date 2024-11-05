@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Sueldos - CCL Auditores y Consultores</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        .error {
+            color: #e74c3c;
+            text-align: center;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Sueldos</h1>
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } else if (info && info.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Sueldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% info.forEach(sueldo => { %>
+                        <tr>
+                            <td><%= sueldo.empleado %></td>
+                            <td><%= sueldo.sueldo %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No hay información disponible.</p>
+        <% } %>
+        <footer>
+            &copy; 2024 CCL Auditores y Consultores. Todos los derechos reservados.
+        </footer>
+    </div>
+</body>
+</html>
